@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>İhbar Merkezi</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;padding:20px;min-height:100vh;
+  font-family:Arial,sans-serif;color:#f1f5f9;
+  background:radial-gradient(circle at top,#12304d,#080d18 65%);
+}
+.panel{
+  width:100%;max-width:480px;margin:30px auto;padding:24px;
+  background:#101b2c;border:1px solid #38bdf8;border-radius:18px;
+  box-shadow:0 0 25px #0284c733;
+}
+h1{color:#38bdf8;text-align:center}
+.subtitle{text-align:center;color:#cbd5e1;line-height:1.6}
+label{display:block;margin-top:12px;font-weight:bold}
+input,select,textarea{
+  display:block;width:100%;margin-top:7px;padding:13px;
+  border:1px solid #334155;border-radius:9px;
+  background:#080d18;color:white;font:inherit;
+}
+textarea{resize:vertical;min-height:100px}
+button{
+  display:block;width:100%;margin-top:14px;padding:14px;
+  border:0;border-radius:9px;background:#0284c7;color:white;
+  font-size:16px;font-weight:bold;cursor:pointer;
+}
+button:hover{background:#0369a1}
+.secondary{background:#334155}
+.secondary:hover{background:#475569}
+.contact{
+  margin-top:16px;padding:16px;text-align:center;
+  overflow-wrap:anywhere;background:#080d18;
+  border:1px solid #26384d;border-radius:12px;
+}
+.contact h2{font-size:19px;color:#7dd3fc}
+#ihbarFormu,#iletisimMenu{display:none}
+.overlay{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;background:rgba(0,0,0,.85);
+}
+.modal{
+  width:100%;max-width:390px;padding:25px;
+  border:1px solid #38bdf8;border-radius:18px;
+  background:#101b2c;box-shadow:0 0 35px #0284c755;
+  text-align:center;
+}
+.modal p{line-height:1.7}
+.warning{color:#fbbf24}
+.maintenance{color:#fbbf24}
+</style>
+</head>
+<body>
+
+<!-- ANA MENÜ -->
+<main class="panel" id="anaMenu">
+  <h1>🚨 İHBAR MERKEZİ</h1>
+  <p class="subtitle">İşlem yapmak için bir menü seç.</p>
+  <button type="button" onclick="ihbarFormunuAc()">🚨 İhbar Oluştur</button>
+  <button type="button" onclick="sorgulamaMerkeziniAc()">🔎 Sorgulama Merkezi</button>
+</main>
+
+<!-- İHBAR FORMU -->
+<section class="panel" id="ihbarFormu">
+  <h1>📋 İHBAR FORMU</h1>
+
+  <label for="birim">İhbar birimi</label>
+  <select id="birim">
+    <option value="">Birim seçiniz</option>
+    <option>Polis</option>
+    <option>Jandarma</option>
+    <option>Ambulans</option>
+    <option>İtfaiye</option>
+  </select>
+
+  <label for="ad">Ad</label>
+  <input id="ad" placeholder="Adınızı girin">
+
+  <label for="soyad">Soyad</label>
+  <input id="soyad" placeholder="Soyadınızı girin">
+
+  <label for="adres">Olay adresi</label>
+  <input id="adres" placeholder="Olayın gerçekleştiği adres">
+
+  <label for="olay">Olay türü</label>
+  <select id="olay">
+    <option value="">Olay türünü seçiniz</option>
+    <option>Kaza</option>
+    <option>Hırsızlık</option>
+    <option>Yangın</option>
+    <option>Sağlık acil durumu</option>
+    <option>Diğer</option>
+  </select>
+
+  <label for="aciklama">İhbar açıklaması</label>
+  <textarea id="aciklama" placeholder="Olayı açıklayın..."></textarea>
+
+  <button type="button" onclick="ihbariGonder()">İhbarı Gönder</button>
+  <button type="button" class="secondary" onclick="anaMenuyeDon()">Geri Dön</button>
+</section>
+
+<!-- İLETİŞİM MENÜSÜ -->
+<section class="panel" id="iletisimMenu">
+  <h1>📞 İLETİŞİM</h1>
+  <p class="subtitle">İhbar Gönderildi :)</p>
+
+  <div class="contact">
+    <h2> Sadece WhatsApp</h2>
+    <p>+27 78 013 9600</p>
+    <button type="button" onclick="whatsappAc()">WhatsApp'ı Aç</button>
+  </div>
+
+  <div class="contact">
+    <h2>TikTok</h2>
+    <p>@yusufbxbaaa</p>
+    <button type="button" onclick="tiktokAc()">TikTok Profilini Aç</button>
+  </div>
+
+  <button type="button" class="secondary" onclick="sayfayiYenile()">Ana Menüye Dön</button>
+</section>
+
+<!-- AÇILIŞ UYARISI -->
+<div class="overlay" id="uyariMenu" role="dialog" aria-modal="true">
+  <div class="modal">
+    <h2 class="warning">⚠️ ÖNEMLİ UYARI</h2>
+    <p>Eksiksiz doldurunuz aksi takdirde ihbar Gerçekleşmez.</p>
+    <button type="button" onclick="uyariyiKapat()">Tamam</button>
+  </div>
+</div>
+
+<!-- SORGULAMA MERKEZİ BAKIM PENCERESİ -->
+<div class="overlay" id="bakimMenu" style="display:none" role="dialog" aria-modal="true">
+  <div class="modal">
+    <h1 class="maintenance">🛠️ BAKIMDA</h1>
+    <p>Sorgulama Merkezi şu anda bakımda.</p>
+    <hr style="border-color:#334155;margin:20px 0">
+
+    <h3>📱 İletişim</h3>
+    <p> WhatsApp: +27 78 013 9600</p>
+    <p>TikTok: @yusufbxbaaa</p>
+
+    <button type="button" class="secondary" onclick="sorgulamaMerkeziniKapat()">Geri Dön</button>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+function el(id){return document.getElementById(id)}
+
+function uyariyiKapat(){
+  el("uyariMenu").style.display="none";
+}
+
+function ihbarFormunuAc(){
+  el("anaMenu").style.display="none";
+  el("iletisimMenu").style.display="none";
+  el("ihbarFormu").style.display="block";
+  window.scrollTo(0,0);
+}
+
+function ihbariGonder(){
+  const alanlar=[
+    ["birim","İhbar birimini seçin."],
+    ["ad","Adınızı girin."],
+    ["soyad","Soyadınızı girin."],
+    ["adres","Olay adresini girin."],
+    ["olay","Olay türünü seçin."],
+    ["aciklama","İhbar açıklamasını yazın."]
+  ];
+
+  for(const [id,mesaj] of alanlar){
+    if(!el(id).value.trim()){
+      alert(mesaj);
+      el(id).focus();
+      return;
+    }
+  }
+
+  el("ihbarFormu").style.display="none";
+  el("iletisimMenu").style.display="block";
+  window.scrollTo(0,0);
+}
+
+function anaMenuyeDon(){
+  el("ihbarFormu").style.display="none";
+  el("iletisimMenu").style.display="none";
+  el("anaMenu").style.display="block";
+  window.scrollTo(0,0);
+}
+
+function sorgulamaMerkeziniAc(){
+  el("bakimMenu").style.display="flex";
+}
+
+function sorgulamaMerkeziniKapat(){
+  el("bakimMenu").style.display="none";
+}
+
+function whatsappAc(){
+  window.open("https://wa.me/27780139600","_blank","noopener");
+}
+
+function tiktokAc(){
+  window.open("https://www.tiktok.com/@yusufbxbaaa","_blank","noopener");
+}
+
+function sayfayiYenile(){
+  window.location.reload();
+}
+</script>
+</body>
+</html>
