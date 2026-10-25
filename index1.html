@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080d18">
+<title>İhbar Merkezi | RxYusuf</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  padding:18px;
+  min-height:100vh;
+  font-family:Arial,sans-serif;
+  color:#f1f5f9;
+  background:radial-gradient(circle at top,#12304d,#080d18 65%);
+}
+
+/* Ekranda sabit kalan, içerik üstünde görünen filigran */
+body::before{
+  content:"RxYusufBxba";
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:max-content;
+  max-width:95vw;
+  font-size:clamp(30px,8vw,78px);
+  font-weight:900;
+  letter-spacing:1px;
+  color:rgba(56,189,248,.075);
+  white-space:nowrap;
+  pointer-events:none;
+  user-select:none;
+  z-index:5;
+  text-shadow:0 0 18px rgba(56,189,248,.04);
+}
+
+header,footer,.panel{
+  width:100%;
+  max-width:490px;
+  margin-left:auto;
+  margin-right:auto;
+  position:relative;
+  z-index:1;
+}
+
+header{text-align:center;padding:14px 0}
+.logo{font-size:38px}
+h1{color:#38bdf8;text-align:center}
+h2{color:#7dd3fc}
+.subtitle{text-align:center;color:#cbd5e1;line-height:1.7}
+
+.panel{
+  margin-top:20px;
+  margin-bottom:20px;
+  padding:23px;
+  background:#101b2c;
+  border:1px solid #38bdf8;
+  border-radius:18px;
+  box-shadow:0 0 25px #0284c722;
+}
+
+.menu-card,.contact,.result{
+  margin-top:15px;
+  padding:16px;
+  background:#080d18;
+  border:1px solid #26384d;
+  border-radius:12px;
+}
+
+.menu-card p,.contact p{color:#cbd5e1;line-height:1.6}
+
+label{
+  display:block;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+input,select,textarea{
+  width:100%;
+  display:block;
+  margin-top:7px;
+  padding:13px;
+  background:#080d18;
+  color:white;
+  border:1px solid #334155;
+  border-radius:9px;
+  font:inherit;
+}
+
+input:focus,select:focus,textarea:focus{
+  outline:2px solid #38bdf8;
+}
+
+textarea{min-height:100px;resize:vertical}
+
+button{
+  width:100%;
+  margin-top:13px;
+  padding:14px;
+  background:#0284c7;
+  color:white;
+  border:0;
+  border-radius:9px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{background:#0369a1}
+.secondary{background:#334155}
+.secondary:hover{background:#475569}
+
+.notice{
+  margin-top:15px;
+  padding:12px;
+  background:#080d18;
+  border-left:3px solid #38bdf8;
+  border-radius:6px;
+  color:#cbd5e1;
+  font-size:12px;
+  line-height:1.7;
+}
+
+#ihbarFormu,#iletisimMenu,#sorgulamaPaneli{
+  display:none;
+}
+
+.result{
+  display:none;
+  line-height:1.7;
+  overflow-wrap:anywhere;
+}
+
+.code{
+  padding:15px;
+  margin:14px 0;
+  text-align:center;
+  font-size:32px;
+  font-weight:bold;
+  letter-spacing:7px;
+  color:#7dd3fc;
+  background:#080d18;
+  border:1px dashed #38bdf8;
+  border-radius:10px;
+}
+
+.status{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  background:#12304d;
+  color:#7dd3fc;
+  font-weight:bold;
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:#000c;
+}
+
+.modal{
+  max-width:390px;
+  width:100%;
+  padding:23px;
+  text-align:center;
+  background:#101b2c;
+  border:1px solid #38bdf8;
+  border-radius:18px;
+}
+
+.modal p{line-height:1.7;color:#cbd5e1}
+
+footer{
+  text-align:center;
+  padding:20px;
+  color:#94a3b8;
+  font-size:12px;
+}
+
+footer strong{color:#38bdf8}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🚨</div>
+  <h1>İHBAR MERKEZİ</h1>
+  <p class="subtitle">İhbar ve takip sistemi</p>
+</header>
+
+<!-- ANA MENÜ -->
+<main class="panel" id="anaMenu">
+  <h1>Hoş Geldiniz</h1>
+  <p class="subtitle">Yapmak istediğiniz işlemi seçin.</p>
+
+  <div class="menu-card">
+    <h2>🚨 İhbar Oluştur</h2>
+    <p>Yeni bir ihbar kaydı oluşturun ve takip kodunuzu alın.</p>
+    <button type="button" onclick="ihbarFormunuAc()">İhbar Oluştur →</button>
+  </div>
+
+  <div class="menu-card">
+    <h2>🔎 Sorgulama Merkezi</h2>
+    <p>6 haneli takip kodunuzla kayıt durumunu sorgulayın.</p>
+    <button type="button" onclick="sorgulamaMerkeziniAc()">Sorgulama Yap →</button>
+  </div>
+
+  <div class="notice">
+    Bu bağımsız bir demo sistemidir. Resmî kurumlara bağlı değildir ve ihbarları acil yardım birimlerine iletmez.
+  </div>
+</main>
+
+<!-- İHBAR FORMU -->
+<section class="panel" id="ihbarFormu">
+  <h1>📋 İHBAR FORMU</h1>
+  <p class="subtitle">Alanları doldurduktan sonra gönderin.</p>
+
+  <form id="kayitFormu" novalidate>
+    <label for="birim">İhbar birimi</label>
+    <select id="birim">
+      <option value="">Birim seçiniz</option>
+      <option>Polis</option>
+      <option>Jandarma</option>
+      <option>Ambulans</option>
+      <option>İtfaiye</option>
+    </select>
+
+    <label for="ad">Ad</label>
+    <input id="ad" maxlength="60" placeholder="Adınızı girin">
+
+    <label for="soyad">Soyad</label>
+    <input id="soyad" maxlength="60" placeholder="Soyadınızı girin">
+
+    <label for="adres">Olay adresi</label>
+    <input id="adres" maxlength="200" placeholder="Olayın gerçekleştiği adres">
+
+    <label for="olay">Olay türü</label>
+    <select id="olay">
+      <option value="">Olay türünü seçiniz</option>
+      <option>Kaza</option>
+      <option>Hırsızlık</option>
+      <option>Yangın</option>
+      <option>Sağlık acil durumu</option>
+      <option>Diğer</option>
+    </select>
+
+    <label for="aciklama">Açıklama</label>
+    <textarea id="aciklama" maxlength="2000" placeholder="Olayı açıklayın..."></textarea>
+
+    <button type="button" onclick="ihbariGonder()">İhbarı Gönder →</button>
+    <button type="button" class="secondary" onclick="anaMenuyeDon()">← Ana Menü</button>
+  </form>
+</section>
+
+<!-- TAKİP KODU -->
+<section class="panel" id="iletisimMenu">
+  <h1>✅ Kayıt Oluşturuldu</h1>
+  <p class="subtitle">Takip kodun aşağıda. Sorgulamak için kodu sakla.</p>
+
+  <div class="code" id="olusanKod">------</div>
+
+  <button type="button" onclick="koduKopyala()">📋 Kodu Kopyala</button>
+  <button type="button" onclick="sorgulamaMerkeziniAc()">🔎 İhbar Durumunu Sorgula</button>
+  <button type="button" class="secondary" onclick="anaMenuyeDon()">Ana Menü</button>
+
+  <div class="notice">
+    Kayıtlar bu tarayıcıda tutulur; başka cihazlarda otomatik görünmez.
+  </div>
+</section>
+
+<!-- SORGULAMA MERKEZİ -->
+<section class="panel" id="sorgulamaPaneli">
+  <h1>🔎 SORGULAMA MERKEZİ</h1>
+  <p class="subtitle">6 haneli takip kodunu gir.</p>
+
+  <label for="sorguKodu">Takip kodu</label>
+  <input id="sorguKodu" inputmode="numeric" maxlength="6" placeholder="Örn. 482105">
+
+  <button type="button" onclick="ihbarSorgula()">Durumu Sorgula</button>
+
+  <div class="result" id="sorguSonucu" aria-live="polite"></div>
+
+  <button type="button" class="secondary" onclick="anaMenuyeDon()">← Ana Menü</button>
+
+  <div class="notice">
+    Takip kodu yalnızca bu tarayıcıda oluşturulan kayıtlar için geçerlidir.
+  </div>
+</section>
+
+<!-- UYARI -->
+<div class="overlay" id="uyariMenu" role="dialog" aria-modal="true">
+  <div class="modal">
+    <h2>⚠️ Önemli Bilgi</h2>
+    <p>VPN Siz Giriş Yapmayın Destek için Whatsapp         +27 78 013 9600 Üzeinden iletişime geçebilirsiniz .</p>
+    <button type="button" onclick="uyariyiKapat()">Anladım</button>
+  </div>
+</div>
+
+<footer>
+  <strong>RxYusuf</strong> tarafından tasarlanmıştır.<br>
+Çalışmazsa bizimle iletişime geçin Sadece Whatsapp +27 78 013 9600
+</footer>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const STORAGE_KEY = "rxYusufIhbarTakip_v1";
+let sonOlusanKod = "";
+
+function kayitlariOku(){
+  try{
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    return data && typeof data === "object" ? data : {};
+  }catch(e){
+    alert("Tarayıcı kayıtlarına erişilemiyor. Siteyi normal tarayıcıda açmayı dene.");
+    return {};
+  }
+}
+
+function kayitlariKaydet(data){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    return true;
+  }catch(e){
+    alert("Kayıt tarayıcıya kaydedilemedi. Depolama ayarlarını kontrol et.");
+    return false;
+  }
+}
+
+function bolumleriGizle(){
+  $("anaMenu").style.display = "none";
+  $("ihbarFormu").style.display = "none";
+  $("iletisimMenu").style.display = "none";
+  $("sorgulamaPaneli").style.display = "none";
+}
+
+function anaMenuyeDon(){
+  bolumleriGizle();
+  $("anaMenu").style.display = "block";
+  window.scrollTo(0,0);
+}
+
+function ihbarFormunuAc(){
+  bolumleriGizle();
+  $("ihbarFormu").style.display = "block";
+  window.scrollTo(0,0);
+}
+
+function yeniKodOlustur(kayitlar){
+  let kod;
+  do{
+    kod = String(Math.floor(100000 + Math.random()*900000));
+  }while(kayitlar[kod]);
+  return kod;
+}
+
+function ihbariGonder(){
+  const alanlar = [
+    ["birim","İhbar birimini seç."],
+    ["ad","Adını gir."],
+    ["soyad","Soyadını gir."],
+    ["adres","Olay adresini gir."],
+    ["olay","Olay türünü seç."],
+    ["aciklama","İhbar açıklamasını yaz."]
+  ];
+
+  for(const [id,mesaj] of alanlar){
+    const alan = $(id);
+    if(!alan || !alan.value.trim()){
+      alert(mesaj);
+      if(alan) alan.focus();
+      return;
+    }
+  }
+
+  const kayitlar = kayitlariOku();
+  const kod = yeniKodOlustur(kayitlar);
+
+  kayitlar[kod] = {
+    kod: kod,
+    birim: $("birim").value,
+    ad: $("ad").value.trim(),
+    soyad: $("soyad").value.trim(),
+    adres: $("adres").value.trim(),
+    olay: $("olay").value,
+    aciklama: $("aciklama").value.trim(),
+    durum: "Alındı",
+    tarih: new Date().toLocaleString("tr-TR")
+  };
+
+  if(!kayitlariKaydet(kayitlar)) return;
+
+  sonOlusanKod = kod;
+  $("olusanKod").textContent = kod;
+
+  bolumleriGizle();
+  $("iletisimMenu").style.display = "block";
+  window.scrollTo(0,0);
+}
+
+function koduKopyala(){
+  const kod = sonOlusanKod || $("olusanKod").textContent;
+
+  if(!/^\d{6}$/.test(kod)){
+    alert("Kopyalanacak takip kodu bulunamadı.");
+    return;
+  }
+
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(kod)
+      .then(()=>alert("Takip kodu kopyalandı: "+kod))
+      .catch(()=>prompt("Kodu kopyala:",kod));
+  }else{
+    prompt("Takip kodunu kopyala:",kod);
+  }
+}
+
+function sorgulamaMerkeziniAc(){
+  bolumleriGizle();
+  $("sorgulamaPaneli").style.display = "block";
+  $("sorguSonucu").style.display = "none";
+  window.scrollTo(0,0);
+  $("sorguKodu").focus();
+}
+
+function ihbarSorgula(){
+  const kod = $("sorguKodu").value.trim();
+  const sonuc = $("sorguSonucu");
+
+  sonuc.replaceChildren();
+  sonuc.style.display = "block";
+
+  if(!/^\d{6}$/.test(kod)){
+    sonuc.textContent = "Lütfen 6 haneli bir takip kodu gir.";
+    return;
+  }
+
+  const kayitlar = kayitlariOku();
+  const kayit = kayitlar[kod];
+
+  if(!kayit){
+    sonuc.textContent = "Bu kodla eşleşen kayıt bulunamadı. Kodu kontrol et ve aynı tarayıcıda sorgula.";
+    return;
+  }
+
+  const baslik = document.createElement("h2");
+  baslik.textContent = "✅ İhbar Kaydı Bulundu";
+
+  const durum = document.createElement("p");
+  durum.className = "status";
+  durum.textContent = "İhbar durumu: " + (kayit.durum || "Alındı");
+  sonuc.append(baslik,durum);
+
+  const alanlar = [
+    ["Takip kodu",kayit.kod || kod],
+    ["Ad",kayit.ad],
+    ["Soyad",kayit.soyad],
+    ["Olay adresi",kayit.adres],
+    ["İhbar birimi",kayit.birim],
+    ["Olay türü",kayit.olay],
+    ["Açıklama",kayit.aciklama],
+    ["Kayıt tarihi",kayit.tarih]
+  ];
+
+  for(const [etiket,deger] of alanlar){
+    const satir = document.createElement("p");
+    const bas = document.createElement("strong");
+    bas.textContent = etiket + ": ";
+
+    const metin = document.createElement("span");
+    metin.textContent = deger ? String(deger) : "Belirtilmedi";
+
+    satir.append(bas,metin);
+    sonuc.appendChild(satir);
+  }
+
+  const yapimci = document.createElement("p");
+  yapimci.textContent = "RxYusuf tarafından tasarlanmıştır.";
+  yapimci.style.color = "#38bdf8";
+  yapimci.style.textAlign = "center";
+  yapimci.style.marginTop = "20px";
+  yapimci.style.fontWeight = "bold";
+  sonuc.appendChild(yapimci);
+}
+
+function uyariyiKapat(){
+  $("uyariMenu").style.display = "none";
+}
+
+$("sorguKodu").addEventListener("input",function(){
+  this.value = this.value.replace(/\D/g,"").slice(0,6);
+});
+</script>
+
+</body>
+</html>
