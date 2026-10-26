@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -9,198 +8,119 @@
 
 <style>
 *{box-sizing:border-box}
-
 body{
-  margin:0;
-  padding:18px;
-  min-height:100vh;
-  font-family:Arial,sans-serif;
-  color:#f1f5f9;
+  margin:0;padding:18px;min-height:100vh;
+  font-family:Arial,sans-serif;color:#f1f5f9;
   background:radial-gradient(circle at top,#12304d,#080d18 65%);
 }
-
-/* Ekranda sabit kalan, içerik üstünde görünen filigran */
 body::before{
-  content:"RxYusufBxba";
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:max-content;
-  max-width:95vw;
-  font-size:clamp(30px,8vw,78px);
-  font-weight:900;
-  letter-spacing:1px;
-  color:rgba(56,189,248,.075);
-  white-space:nowrap;
-  pointer-events:none;
-  user-select:none;
-  z-index:5;
-  text-shadow:0 0 18px rgba(56,189,248,.04);
+  content:"RxYusufBxba";position:fixed;top:50%;left:50%;
+  transform:translate(-50%,-50%);width:max-content;max-width:95vw;
+  font-size:clamp(30px,8vw,78px);font-weight:900;letter-spacing:1px;
+  color:rgba(56,189,248,.075);white-space:nowrap;
+  pointer-events:none;user-select:none;z-index:5;
 }
-
 header,footer,.panel{
-  width:100%;
-  max-width:490px;
-  margin-left:auto;
-  margin-right:auto;
-  position:relative;
-  z-index:1;
+  width:100%;max-width:490px;margin-left:auto;margin-right:auto;
+  position:relative;z-index:1;
 }
-
 header{text-align:center;padding:14px 0}
 .logo{font-size:38px}
 h1{color:#38bdf8;text-align:center}
 h2{color:#7dd3fc}
 .subtitle{text-align:center;color:#cbd5e1;line-height:1.7}
-
 .panel{
-  margin-top:20px;
-  margin-bottom:20px;
-  padding:23px;
-  background:#101b2c;
-  border:1px solid #38bdf8;
-  border-radius:18px;
-  box-shadow:0 0 25px #0284c722;
+  margin-top:20px;margin-bottom:20px;padding:23px;
+  background:#101b2c;border:1px solid #38bdf8;
+  border-radius:18px;box-shadow:0 0 25px #0284c722;
 }
-
 .menu-card,.contact,.result{
-  margin-top:15px;
-  padding:16px;
-  background:#080d18;
-  border:1px solid #26384d;
-  border-radius:12px;
+  margin-top:15px;padding:16px;background:#080d18;
+  border:1px solid #26384d;border-radius:12px;
 }
-
 .menu-card p,.contact p{color:#cbd5e1;line-height:1.6}
-
-label{
-  display:block;
-  margin-top:15px;
-  font-weight:bold;
-}
-
+label{display:block;margin-top:15px;font-weight:bold}
 input,select,textarea{
-  width:100%;
-  display:block;
-  margin-top:7px;
-  padding:13px;
-  background:#080d18;
-  color:white;
-  border:1px solid #334155;
-  border-radius:9px;
-  font:inherit;
+  width:100%;display:block;margin-top:7px;padding:13px;
+  background:#080d18;color:white;border:1px solid #334155;
+  border-radius:9px;font:inherit;
 }
-
-input:focus,select:focus,textarea:focus{
-  outline:2px solid #38bdf8;
-}
-
+input:focus,select:focus,textarea:focus{outline:2px solid #38bdf8}
 textarea{min-height:100px;resize:vertical}
-
 button{
-  width:100%;
-  margin-top:13px;
-  padding:14px;
-  background:#0284c7;
-  color:white;
-  border:0;
-  border-radius:9px;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer;
+  width:100%;margin-top:13px;padding:14px;background:#0284c7;
+  color:white;border:0;border-radius:9px;font-size:15px;
+  font-weight:bold;cursor:pointer;
 }
-
 button:hover{background:#0369a1}
 .secondary{background:#334155}
 .secondary:hover{background:#475569}
-
 .notice{
-  margin-top:15px;
-  padding:12px;
-  background:#080d18;
-  border-left:3px solid #38bdf8;
-  border-radius:6px;
-  color:#cbd5e1;
-  font-size:12px;
-  line-height:1.7;
+  margin-top:15px;padding:12px;background:#080d18;
+  border-left:3px solid #38bdf8;border-radius:6px;
+  color:#cbd5e1;font-size:12px;line-height:1.7;
 }
-
-#ihbarFormu,#iletisimMenu,#sorgulamaPaneli{
-  display:none;
-}
-
-.result{
-  display:none;
-  line-height:1.7;
-  overflow-wrap:anywhere;
-}
-
+#ihbarFormu,#iletisimMenu,#sorgulamaPaneli,#adminPaneli{display:none}
+.result{display:none;line-height:1.7;overflow-wrap:anywhere}
 .code{
-  padding:15px;
-  margin:14px 0;
-  text-align:center;
-  font-size:32px;
-  font-weight:bold;
-  letter-spacing:7px;
-  color:#7dd3fc;
-  background:#080d18;
-  border:1px dashed #38bdf8;
-  border-radius:10px;
+  padding:15px;margin:14px 0;text-align:center;font-size:32px;
+  font-weight:bold;letter-spacing:7px;color:#7dd3fc;
+  background:#080d18;border:1px dashed #38bdf8;border-radius:10px;
 }
-
 .status{
-  display:inline-block;
-  padding:6px 10px;
-  border-radius:20px;
-  background:#12304d;
-  color:#7dd3fc;
-  font-weight:bold;
+  display:inline-block;padding:6px 10px;border-radius:20px;
+  background:#12304d;color:#7dd3fc;font-weight:bold;
 }
-
 .overlay{
-  position:fixed;
-  inset:0;
-  z-index:10;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  background:#000c;
+  position:fixed;inset:0;z-index:10;display:flex;
+  align-items:center;justify-content:center;padding:18px;background:#000c;
 }
-
 .modal{
-  max-width:390px;
-  width:100%;
-  padding:23px;
-  text-align:center;
-  background:#101b2c;
-  border:1px solid #38bdf8;
-  border-radius:18px;
+  max-width:390px;width:100%;padding:23px;text-align:center;
+  background:#101b2c;border:1px solid #38bdf8;border-radius:18px;
 }
-
 .modal p{line-height:1.7;color:#cbd5e1}
-
-footer{
-  text-align:center;
-  padding:20px;
-  color:#94a3b8;
-  font-size:12px;
-}
-
+footer{text-align:center;padding:20px;color:#94a3b8;font-size:12px}
 footer strong{color:#38bdf8}
+
+.admin-top{max-width:490px;margin:0 auto 10px;position:relative;z-index:2}
+.admin-top button{background:#7c3aed}
+.admin-top button:hover{background:#6d28d9}
+#adminGirisKutusu{display:none}
+.admin-record{padding:12px;margin:10px 0;background:#080d18;border:1px solid #334155;border-radius:10px;overflow-wrap:anywhere}
 </style>
 </head>
 
 <body>
 
+<div class="admin-top">
+  <button type="button" onclick="adminGirisiniAc()">🔐 Admin Paneli</button>
+</div>
+<section class="panel" id="adminGirisKutusu">
+  <h1>🔐 Yönetici Girişi</h1>
+  <p class="subtitle">Yönetici hesabınla giriş yap.</p>
+  <label for="adminKullanici">Kullanıcı adı</label>
+  <input id="adminKullanici" autocomplete="username" maxlength="80" placeholder="Kullanıcı adı">
+  <label for="adminSifre">Şifre</label>
+  <input id="adminSifre" type="password" autocomplete="current-password" placeholder="Şifre">
+  <button type="button" onclick="adminGirisYap()">Giriş Yap</button>
+  <button type="button" class="secondary" onclick="anaMenuyeDon()">← Ana Menü</button>
+  <div id="adminGirisMesaj" class="notice" aria-live="polite">Giriş, sunucu tarafında doğrulanır.</div>
+</section>
+<section class="panel" id="adminPaneli">
+  <h1>🛡️ Yönetici Paneli</h1>
+  <p class="subtitle">Sunucuya kaydedilen ihbar kayıtları.</p>
+  <button type="button" onclick="adminKayitlariYukle()">🔄 Kayıtları Yenile</button>
+  <div id="adminKayitListesi" class="result" style="display:block">Kayıtlar yükleniyor…</div>
+  <button type="button" class="secondary" onclick="adminCikisYap()">Çıkış Yap</button>
+  <button type="button" class="secondary" onclick="anaMenuyeDon()">← Ana Menü</button>
+</section>
 <header>
   <div class="logo">🚨</div>
   <h1>İHBAR MERKEZİ</h1>
   <p class="subtitle">İhbar ve takip sistemi</p>
 </header>
 
-<!-- ANA MENÜ -->
 <main class="panel" id="anaMenu">
   <h1>Hoş Geldiniz</h1>
   <p class="subtitle">Yapmak istediğiniz işlemi seçin.</p>
@@ -217,12 +137,59 @@ footer strong{color:#38bdf8}
     <button type="button" onclick="sorgulamaMerkeziniAc()">Sorgulama Yap →</button>
   </div>
 
-  <div class="notice">
-   Hala Üzerinde Çalışılıyor daha fazlası için çalışıyoruz Yeni özellikler eklenecek:))
+  <div class="menu-card" id="yemekSepetiKart">
+    <h2>🍔 Yemek Sepeti</h2>
+    <p>Ürün seç, sepete ekle ve sipariş taslağı oluştur.</p>
+    <button type="button" onclick="yemekSepetiMenuAc()">Yemek Sepeti Menüsünü Aç →</button>
   </div>
 </main>
 
-<!-- İHBAR FORMU -->
+<section class="panel" id="yemekSepetiBolumu" style="display:none">
+  <h1>🍔 YEMEK SEPETİ MENÜSÜ</h1>
+  <p class="subtitle">Ürün seç, sepete ekle ve siparişi hazırla.</p>
+
+  <label for="ysUrun">Ürün seç</label>
+  <select id="ysUrun">
+    <option value="">Ürün seçiniz</option>
+    <option value="Hamburger|250">Hamburger — 250 TL</option>
+    <option value="Pizza|320">Pizza — 320 TL</option>
+    <option value="Döner|220">Döner — 220 TL</option>
+    <option value="Tavuk Menü|290">Tavuk Menü — 290 TL</option>
+    <option value="Lahmacun|130">Lahmacun — 130 TL</option>
+    <option value="Ayran|40">Ayran — 40 TL</option>
+  </select>
+
+  <label for="ysAdet">Adet (en fazla 31)</label>
+  <input id="ysAdet" type="number" min="1" max="31" value="1">
+
+  <label for="ysAdres">Teslimat adresi</label>
+  <textarea id="ysAdres" maxlength="300" placeholder="Teslimat adresini yaz"></textarea>
+
+  <label for="ysNot">Sipariş notu (isteğe bağlı)</label>
+  <input id="ysNot" maxlength="200" placeholder="Örn. zile basmayın">
+
+  <button type="button" id="ysSepeteEkleBtn">Sepete Ekle</button>
+  <div class="result" id="ysSepet" style="display:block" aria-live="polite">Sepet boş.</div>
+
+  <button type="button" onclick="ysOdemeSeciminiAc()">💳 Ödeme Yöntemini Seç</button>
+  <div id="ysOdemePaneli" class="menu-card" style="display:none">
+    <h2>Ödeme Yöntemi</h2>
+    <label><input type="radio" name="ysOdeme" value="Kart" style="width:auto;display:inline;margin-right:8px"> Kart</label>
+    <label><input type="radio" name="ysOdeme" value="Nakit" style="width:auto;display:inline;margin-right:8px"> Nakit</label>
+    <p class="notice">Bu seçim yalnızca sipariş taslağına eklenir; gerçek ödeme alınmaz.</p>
+  </div>
+
+  <button type="button" onclick="ysSiparisOlustur()">Sipariş Taslağı Oluştur</button>
+
+  <div class="notice">
+    Hala Üzerinde Çalışılıyor daha fazlası için çalışıyoruz Yeni özellikler eklenecek:))
+  </div>
+  <div class="notice">
+    Kapıda Ödemelidir Saygınız İçin teşekkür ederiz :).
+  </div>
+  <button type="button" class="secondary" onclick="anaMenuyeDon()">← Ana Menü</button>
+</section>
+
 <section class="panel" id="ihbarFormu">
   <h1>📋 İHBAR FORMU</h1>
   <p class="subtitle">Alanları doldurduktan sonra gönderin.</p>
@@ -264,53 +231,37 @@ footer strong{color:#38bdf8}
   </form>
 </section>
 
-<!-- TAKİP KODU -->
 <section class="panel" id="iletisimMenu">
   <h1>✅ Kayıt Oluşturuldu</h1>
   <p class="subtitle">Takip kodun aşağıda. Sorgulamak için kodu sakla.</p>
-
   <div class="code" id="olusanKod">------</div>
-
   <button type="button" onclick="koduKopyala()">📋 Kodu Kopyala</button>
   <button type="button" onclick="sorgulamaMerkeziniAc()">🔎 İhbar Durumunu Sorgula</button>
   <button type="button" class="secondary" onclick="anaMenuyeDon()">Ana Menü</button>
-
-  <div class="notice">
-    Kayıtlar bu tarayıcıda tutulur; başka cihazlarda otomatik görünmez.
-  </div>
+  <div class="notice">Kayıtlar bu tarayıcıda tutulur; başka cihazlarda otomatik görünmez.</div>
 </section>
 
-<!-- SORGULAMA MERKEZİ -->
 <section class="panel" id="sorgulamaPaneli">
   <h1>🔎 SORGULAMA MERKEZİ</h1>
-  <p class="subtitle">6 haneli takip kodunu gir.</p>
-
+  <p class="subtitle">İhbar veya Yemek Sepeti sipariş taslağının 6 haneli takip kodunu gir.</p>
   <label for="sorguKodu">Takip kodu</label>
   <input id="sorguKodu" inputmode="numeric" maxlength="6" placeholder="Örn. 482105">
-
   <button type="button" onclick="ihbarSorgula()">Durumu Sorgula</button>
-
   <div class="result" id="sorguSonucu" aria-live="polite"></div>
-
   <button type="button" class="secondary" onclick="anaMenuyeDon()">← Ana Menü</button>
-
-  <div class="notice">
-    Takip kodu yalnızca bu tarayıcıda oluşturulan kayıtlar için geçerlidir.
-  </div>
+  <div class="notice">Kayıtlar aynı tarayıcıda saklanır ve takip koduyla sorgulanabilir.</div>
 </section>
 
-<!-- UYARI -->
 <div class="overlay" id="uyariMenu" role="dialog" aria-modal="true">
   <div class="modal">
     <h2>⚠️ Önemli Bilgi</h2>
-    <p>VPN Siz Giriş Yapmayın Destek için Whatsapp         +27 78 013 9600 Üzeinden iletişime geçebilirsiniz .</p>
+    <p>Herhangi bir sorumluluk kabul etmiyoruz Destek için Sadece WhatsApp +27 78 013 9600 üzerinden iletişime geçebilirsiniz.</p>
     <button type="button" onclick="uyariyiKapat()">Anladım</button>
   </div>
 </div>
 
 <footer>
-  <strong>RxYusuf</strong> tarafından tasarlanmıştır.<br>
-Çalışmazsa bizimle iletişime geçin Sadece Whatsapp +27 78 013 9600
+  <strong>RxYusuf</strong> tarafından tasarlanmıştır © 2026 Tüm hakları saklıdır.
 </footer>
 
 <script>
@@ -319,13 +270,14 @@ footer strong{color:#38bdf8}
 const $ = id => document.getElementById(id);
 const STORAGE_KEY = "rxYusufIhbarTakip_v1";
 let sonOlusanKod = "";
+let ysSepetUrunleri = [];
 
 function kayitlariOku(){
   try{
     const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
     return data && typeof data === "object" ? data : {};
-  }catch(e){
-    alert("Tarayıcı kayıtlarına erişilemiyor. Siteyi normal tarayıcıda açmayı dene.");
+  }catch(error){
+    alert("Tarayıcı kayıtlarına erişilemiyor.");
     return {};
   }
 }
@@ -334,22 +286,26 @@ function kayitlariKaydet(data){
   try{
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     return true;
-  }catch(e){
-    alert("Kayıt tarayıcıya kaydedilemedi. Depolama ayarlarını kontrol et.");
+  }catch(error){
+    alert("Kayıt tarayıcıya kaydedilemedi.");
     return false;
   }
 }
 
 function bolumleriGizle(){
-  $("anaMenu").style.display = "none";
-  $("ihbarFormu").style.display = "none";
-  $("iletisimMenu").style.display = "none";
-  $("sorgulamaPaneli").style.display = "none";
+  ["anaMenu","ihbarFormu","iletisimMenu","sorgulamaPaneli","yemekSepetiBolumu","adminGirisKutusu","adminPaneli"]
+    .forEach(id => $(id).style.display = "none");
 }
 
 function anaMenuyeDon(){
   bolumleriGizle();
   $("anaMenu").style.display = "block";
+  window.scrollTo(0,0);
+}
+
+function yemekSepetiMenuAc(){
+  bolumleriGizle();
+  $("yemekSepetiBolumu").style.display = "block";
   window.scrollTo(0,0);
 }
 
@@ -362,12 +318,12 @@ function ihbarFormunuAc(){
 function yeniKodOlustur(kayitlar){
   let kod;
   do{
-    kod = String(Math.floor(100000 + Math.random()*900000));
+    kod = String(Math.floor(100000 + Math.random() * 900000));
   }while(kayitlar[kod]);
   return kod;
 }
 
-function ihbariGonder(){
+async function ihbariGonder(){
   const alanlar = [
     ["birim","İhbar birimini seç."],
     ["ad","Adını gir."],
@@ -390,22 +346,23 @@ function ihbariGonder(){
   const kod = yeniKodOlustur(kayitlar);
 
   kayitlar[kod] = {
-    kod: kod,
-    birim: $("birim").value,
-    ad: $("ad").value.trim(),
-    soyad: $("soyad").value.trim(),
-    adres: $("adres").value.trim(),
-    olay: $("olay").value,
-    aciklama: $("aciklama").value.trim(),
-    durum: "Alındı",
-    tarih: new Date().toLocaleString("tr-TR")
+    kod,
+    birim:$("birim").value,
+    ad:$("ad").value.trim(),
+    soyad:$("soyad").value.trim(),
+    adres:$("adres").value.trim(),
+    olay:$("olay").value,
+    aciklama:$("aciklama").value.trim(),
+    durum:"Alındı",
+    tarih:new Date().toLocaleString("tr-TR")
   };
 
   if(!kayitlariKaydet(kayitlar)) return;
+  try { await sunucuyaKaydet({...kayitlar[kod], tip:"ihbar"}); }
+  catch(error){ alert("Kayıt bu tarayıcıya kaydedildi ancak sunucuya gönderilemedi. Yönetici panelinde görünmeyebilir."); }
 
   sonOlusanKod = kod;
   $("olusanKod").textContent = kod;
-
   bolumleriGizle();
   $("iletisimMenu").style.display = "block";
   window.scrollTo(0,0);
@@ -413,7 +370,6 @@ function ihbariGonder(){
 
 function koduKopyala(){
   const kod = sonOlusanKod || $("olusanKod").textContent;
-
   if(!/^\d{6}$/.test(kod)){
     alert("Kopyalanacak takip kodu bulunamadı.");
     return;
@@ -421,8 +377,8 @@ function koduKopyala(){
 
   if(navigator.clipboard && window.isSecureContext){
     navigator.clipboard.writeText(kod)
-      .then(()=>alert("Takip kodu kopyalandı: "+kod))
-      .catch(()=>prompt("Kodu kopyala:",kod));
+      .then(() => alert("Takip kodu kopyalandı: " + kod))
+      .catch(() => prompt("Kodu kopyala:",kod));
   }else{
     prompt("Takip kodunu kopyala:",kod);
   }
@@ -439,32 +395,45 @@ function sorgulamaMerkeziniAc(){
 function ihbarSorgula(){
   const kod = $("sorguKodu").value.trim();
   const sonuc = $("sorguSonucu");
-
   sonuc.replaceChildren();
   sonuc.style.display = "block";
 
   if(!/^\d{6}$/.test(kod)){
-    sonuc.textContent = "Lütfen 6 haneli bir takip kodu gir.";
+    sonuc.textContent = "Lütfen Aynı Tarayıcı Dan oluşturulan 6 haneli bir takip kodu gir.";
     return;
   }
 
-  const kayitlar = kayitlariOku();
-  const kayit = kayitlar[kod];
+  const kayit = kayitlariOku()[kod];
 
   if(!kayit){
-    sonuc.textContent = "Bu kodla eşleşen kayıt bulunamadı. Kodu kontrol et ve aynı tarayıcıda sorgula.";
+    sonuc.textContent = "Bu kodla eşleşen kayıt bulunamadı. Aynı tarayıcıda oluşturduğun kodu kontrol et.";
     return;
   }
 
+  const siparisMi = kayit.tip === "yemeksepeti";
   const baslik = document.createElement("h2");
-  baslik.textContent = "✅ İhbar Kaydı Bulundu";
+  baslik.textContent = siparisMi
+    ? "🍔 Yemek Sepeti Siparişi Bulundu"
+    : "✅ İhbar Kaydı Bulundu";
 
   const durum = document.createElement("p");
   durum.className = "status";
-  durum.textContent = "İhbar durumu: " + (kayit.durum || "Alındı");
+  durum.textContent = (siparisMi ? "Sipariş taslağı durumu: " : "İhbar durumu: ")
+    + (kayit.durum || (siparisMi ? "Taslak oluşturuldu" : "Alındı"));
   sonuc.append(baslik,durum);
 
-  const alanlar = [
+  const alanlar = siparisMi ? [
+    ["Kayıt türü","Yemek Sepeti sipariş bölümü"],
+    ["Takip kodu",kayit.kod || kod],
+    ["Ürünler",kayit.urunler],
+    ["Toplam tutar",kayit.toplam != null
+      ? Number(kayit.toplam).toLocaleString("tr-TR") + " TL" : "Belirtilmedi"],
+    ["Ödeme yöntemi",kayit.odeme],
+    ["Teslimat adresi",kayit.adres],
+    ["Sipariş notu",kayit.not],
+    ["Kayıt tarihi",kayit.tarih]
+  ] : [
+    ["Kayıt türü","İhbar"],
     ["Takip kodu",kayit.kod || kod],
     ["Ad",kayit.ad],
     ["Soyad",kayit.soyad],
@@ -479,21 +448,283 @@ function ihbarSorgula(){
     const satir = document.createElement("p");
     const bas = document.createElement("strong");
     bas.textContent = etiket + ": ";
-
     const metin = document.createElement("span");
-    metin.textContent = deger ? String(deger) : "Belirtilmedi";
-
+    metin.textContent = deger != null && String(deger).trim() !== ""
+      ? String(deger) : "Belirtilmedi";
     satir.append(bas,metin);
     sonuc.appendChild(satir);
   }
 
-  const yapimci = document.createElement("p");
-  yapimci.textContent = "RxYusuf tarafından tasarlanmıştır.";
-  yapimci.style.color = "#38bdf8";
-  yapimci.style.textAlign = "center";
-  yapimci.style.marginTop = "20px";
-  yapimci.style.fontWeight = "bold";
-  sonuc.appendChild(yapimci);
+  if(siparisMi){
+    const bilgi = document.createElement("p");
+    bilgi.className = "notice";
+    bilgi.textContent = "Bu kayıt yalnızca sipariş taslağıdır; gerçek sipariş gönderilmedi ve ödeme alınmadı.";
+    sonuc.appendChild(bilgi);
+  }
+}
+
+function ysMesajGoster(metin,hata=false){
+  const alan = $("ysSepet");
+  if(!alan) return;
+
+  let mesaj = alan.querySelector(".ys-sepet-mesaj");
+  if(!mesaj){
+    mesaj = document.createElement("p");
+    mesaj.className = "ys-sepet-mesaj";
+    alan.prepend(mesaj);
+  }
+  mesaj.textContent = metin;
+  mesaj.style.color = hata ? "#fca5a5" : "#7dd3fc";
+  mesaj.setAttribute("role",hata ? "alert" : "status");
+}
+
+function ysSepeteEkle(){
+  const secim = $("ysUrun").value;
+  const adet = Number($("ysAdet").value);
+
+  if(!secim){
+    ysMesajGoster("Önce listeden ürün seç.",true);
+    $("ysUrun").focus();
+    return;
+  }
+
+  if(!Number.isInteger(adet) || adet < 1 || adet > 31){
+    ysMesajGoster("Adet 1 ile 31 arasında tam sayı olmalı.",true);
+    $("ysAdet").focus();
+    return;
+  }
+
+  const [ad,fiyatMetni] = secim.split("|");
+  const fiyat = Number(fiyatMetni);
+
+  if(!ad || !Number.isFinite(fiyat) || fiyat <= 0){
+    ysMesajGoster("Ürün bilgisi okunamadı. Tekrar seç.",true);
+    return;
+  }
+
+  const mevcut = ysSepetUrunleri.find(u => u.ad === ad);
+
+  if(mevcut){
+    if(mevcut.adet + adet > 31){
+      ysMesajGoster("Aynı üründen sepette en fazla 31 adet olabilir.",true);
+      return;
+    }
+    mevcut.adet += adet;
+  }else{
+    ysSepetUrunleri.push({ad,fiyat,adet});
+  }
+
+  ysSepetiGoster();
+  ysMesajGoster(ad + " sepete eklendi.");
+  $("ysAdet").value = "1";
+}
+
+function ysSepetiGoster(){
+  const alan = $("ysSepet");
+  alan.replaceChildren();
+
+  if(ysSepetUrunleri.length === 0){
+    alan.textContent = "Sepet boş. Ürün seçip 'Sepete Ekle' düğmesine bas.";
+    return;
+  }
+
+  let toplam = 0;
+
+  ysSepetUrunleri.forEach((urun,index) => {
+    const satir = document.createElement("div");
+    satir.style.display = "flex";
+    satir.style.gap = "10px";
+    satir.style.alignItems = "center";
+    satir.style.justifyContent = "space-between";
+    satir.style.flexWrap = "wrap";
+    satir.style.padding = "10px 0";
+    satir.style.borderBottom = "1px solid #26384d";
+
+    const bilgi = document.createElement("span");
+    const araToplam = urun.fiyat * urun.adet;
+    toplam += araToplam;
+    bilgi.textContent = `${urun.ad} × ${urun.adet} — ${araToplam.toLocaleString("tr-TR")} TL`;
+
+    const sil = document.createElement("button");
+    sil.type = "button";
+    sil.className = "secondary";
+    sil.style.width = "auto";
+    sil.style.marginTop = "0";
+    sil.style.padding = "8px 12px";
+    sil.textContent = "Kaldır";
+    sil.addEventListener("click",() => {
+      ysSepetUrunleri.splice(index,1);
+      ysSepetiGoster();
+    });
+
+    satir.append(bilgi,sil);
+    alan.appendChild(satir);
+  });
+
+  const tutar = document.createElement("h2");
+  tutar.textContent = "Toplam: " + toplam.toLocaleString("tr-TR") + " TL";
+  alan.appendChild(tutar);
+}
+
+function ysOdemeSeciminiAc(){
+  const panel = $("ysOdemePaneli");
+  panel.style.display = panel.style.display === "block" ? "none" : "block";
+}
+
+async function ysSiparisOlustur(){
+  if(ysSepetUrunleri.length === 0){
+    ysMesajGoster("Önce sepete ürün ekle.",true);
+    return;
+  }
+
+  const odeme = document.querySelector('input[name="ysOdeme"]:checked');
+  if(!odeme){
+    ysMesajGoster("Önce Kart veya Nakit ödeme yöntemini seç.",true);
+    $("ysOdemePaneli").style.display = "block";
+    return;
+  }
+
+  const adres = $("ysAdres").value.trim();
+  if(!adres){
+    ysMesajGoster("Lütfen teslimat adresini yaz.",true);
+    $("ysAdres").focus();
+    return;
+  }
+
+  const urunKopyasi = ysSepetUrunleri.map(u => ({...u}));
+  const toplam = urunKopyasi.reduce((sum,u) => sum + u.fiyat * u.adet,0);
+  const tarih = new Date().toLocaleString("tr-TR");
+  const kayitlar = kayitlariOku();
+  const kod = yeniKodOlustur(kayitlar);
+  const urunMetni = urunKopyasi
+    .map(u => `${u.ad} x ${u.adet} = ${(u.fiyat*u.adet).toLocaleString("tr-TR")} TL`)
+    .join("; ");
+
+  kayitlar[kod] = {
+    tip:"yemeksepeti",kod,urunler:urunMetni,
+    toplam,odeme:odeme.value,adres,
+    not:$("ysNot").value.trim() || "Yok",
+    durum:"Sipariş oluşturuldu",tarih
+  };
+
+  if(!kayitlariKaydet(kayitlar)){
+    ysMesajGoster("Sipariş kaydedilemedi.",true);
+    return;
+  }
+  try { await sunucuyaKaydet(kayitlar[kod]); }
+  catch(error){ ysMesajGoster("Taslak bu tarayıcıya kaydedildi ancak sunucuya gönderilemedi.",true); }
+
+  const metin = [
+    "YEMEK SEPETİ SİPARİŞİ",
+    `Takip kodu: ${kod}`,
+    ...urunKopyasi.map(u => `${u.ad} x ${u.adet} = ${(u.fiyat*u.adet).toLocaleString("tr-TR")} TL`),
+    `Toplam: ${toplam.toLocaleString("tr-TR")} TL`,
+    `Ödeme yöntemi: ${odeme.value}`,
+    `Adres: ${adres}`,
+    `Not: ${$("ysNot").value.trim() || "Yok"}`,
+    `Tarih: ${tarih}`,
+    "Durum:",
+    "gerçek Yemeksepeti siparişi."
+  ].join("\n");
+
+  const sonuc = $("ysSepet");
+  sonuc.replaceChildren();
+
+  const baslik = document.createElement("h2");
+  baslik.textContent = "✅ Sipariş oluşturuldu";
+
+  const aciklama = document.createElement("p");
+  aciklama.textContent = "Aşağıdaki 6 haneli kodla Sorgulama Merkezi'nden sipariş taslağını bulabilirsin.";
+
+  const kodKutusu = document.createElement("div");
+  kodKutusu.className = "code";
+  kodKutusu.textContent = kod;
+
+  const sorgula = document.createElement("button");
+  sorgula.type = "button";
+  sorgula.textContent = "🔎 Bu Siparişi Sorgula";
+  sorgula.addEventListener("click",() => {
+    sorgulamaMerkeziniAc();
+    $("sorguKodu").value = kod;
+    ihbarSorgula();
+  });
+
+  const detay = document.createElement("textarea");
+  detay.readOnly = true;
+  detay.value = metin;
+
+  const kopyala = document.createElement("button");
+  kopyala.type = "button";
+  kopyala.textContent = "Taslağı Kopyala";
+  kopyala.addEventListener("click",async () => {
+    try{
+      await navigator.clipboard.writeText(metin);
+      alert("Taslak kopyalandı.");
+    }catch(error){
+      detay.focus();
+      detay.select();
+      alert("Metin seçildi. Ctrl+C ile kopyalayabilirsin.");
+    }
+  });
+
+  const geri = document.createElement("button");
+  geri.type = "button";
+  geri.className = "secondary";
+  geri.textContent = "Sepete Geri Dön";
+  geri.addEventListener("click",ysSepetiGoster);
+
+  sonuc.append(baslik,aciklama,kodKutusu,sorgula,detay,kopyala,geri);
+}
+
+
+async function sunucuyaKaydet(kayit){
+  const response = await fetch("/api/records", {
+    method:"POST", headers:{"Content-Type":"application/json"},
+    credentials:"same-origin", body:JSON.stringify(kayit)
+  });
+  if(!response.ok) throw new Error("Sunucu kaydı başarısız.");
+}
+function adminGirisiniAc(){
+  bolumleriGizle();
+  $("adminGirisKutusu").style.display="block";
+  $("adminGirisMesaj").textContent="Kullanıcı adı ve şifre sunucuda doğrulanır.";
+  window.scrollTo(0,0);
+}
+async function adminGirisYap(){
+  const mesaj=$("adminGirisMesaj");
+  mesaj.textContent="Giriş kontrol ediliyor…";
+  try{
+    const r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},
+      credentials:"same-origin",body:JSON.stringify({username:$("adminKullanici").value.trim(),password:$("adminSifre").value})});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error || "Giriş başarısız.");
+    $("adminSifre").value="";
+    bolumleriGizle(); $("adminPaneli").style.display="block";
+    await adminKayitlariYukle(); window.scrollTo(0,0);
+  }catch(e){mesaj.textContent=e.message || "Sunucuya bağlanılamadı. Site backend sunucusunda çalışıyor mu?";}
+}
+async function adminKayitlariYukle(){
+  const alan=$("adminKayitListesi"); alan.replaceChildren();
+  try{
+    const r=await fetch("/api/admin/records",{credentials:"same-origin"});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error || "Kayıtlar alınamadı.");
+    if(!data.records.length){alan.textContent="Henüz sunucuya kaydedilmiş kayıt yok.";return;}
+    data.records.forEach(k=>{
+      const kart=document.createElement("div");kart.className="admin-record";
+      const bas=document.createElement("h2");bas.textContent=(k.tip==="yemeksepeti"?"🍔 Sipariş taslağı":"🚨 İhbar")+" — "+(k.kod||"Kodsuz");
+      kart.appendChild(bas);
+      Object.entries(k).forEach(([key,val])=>{
+        if(key==="id"||key==="tip") return;
+        const p=document.createElement("p");p.textContent=key+": "+(typeof val==="object"?JSON.stringify(val):String(val??""));kart.appendChild(p);
+      });
+      alan.appendChild(kart);
+    });
+  }catch(e){alan.textContent=e.message+" Backend'i başlatıp tekrar dene.";}
+}
+async function adminCikisYap(){
+  try{await fetch("/api/admin/logout",{method:"POST",credentials:"same-origin"});}catch(e){}
+  anaMenuyeDon();
 }
 
 function uyariyiKapat(){
@@ -502,6 +733,19 @@ function uyariyiKapat(){
 
 $("sorguKodu").addEventListener("input",function(){
   this.value = this.value.replace(/\D/g,"").slice(0,6);
+});
+
+document.addEventListener("DOMContentLoaded",() => {
+  $("ysSepeteEkleBtn").addEventListener("click",event => {
+    event.preventDefault();
+    try{
+      ysSepeteEkle();
+    }catch(error){
+      console.error("Sepete ekleme hatası:",error);
+      ysMesajGoster("Sepete eklerken hata oluştu. Tekrar dene.",true);
+    }
+  });
+  ysSepetiGoster();
 });
 </script>
 
